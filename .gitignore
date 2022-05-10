@@ -8,4 +8,5 @@ framework/__pycache__
 models/__pycache__
 pro_data/*json
 *pyc
+*npy
 lightning_logs/

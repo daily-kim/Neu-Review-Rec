@@ -159,7 +159,7 @@ if __name__ == '__main__':
     else:
         # amazon dataset
         save_folder = '../dataset/' + filename[:-7]+"_data"
-    print(f"数据集名称：{save_folder}")
+    print(f"Dataset name：{save_folder}")
 
     if not os.path.exists(save_folder + '/train'):
         os.makedirs(save_folder + '/train')
@@ -202,7 +202,6 @@ if __name__ == '__main__':
                 ratings.append(str(js['overall']))
             except:
                 continue
-
     data_frame = {'user_id': pd.Series(users_id), 'item_id': pd.Series(items_id),
                   'ratings': pd.Series(ratings), 'reviews': pd.Series(reviews)}
     data = pd.DataFrame(data_frame)     # [['user_id', 'item_id', 'ratings', 'reviews']]
@@ -243,6 +242,7 @@ if __name__ == '__main__':
         for iid in range(itemNum_all):
             if iid not in iids_train:
                 iidMiss.append(iid)
+
     uid_index = []
     for uid in uidMiss:
         index = data_test.index[data_test['user_id'] == uid].tolist()
@@ -254,7 +254,7 @@ if __name__ == '__main__':
         index = data_test.index[data_test['item_id'] == iid].tolist()
         iid_index.extend(index)
     data_train = pd.concat([data_train, data_test.loc[iid_index]])
-
+    print(len(iid_index))
     all_index = list(set().union(uid_index, iid_index))
     data_test = data_test.drop(all_index)
 
@@ -324,7 +324,8 @@ if __name__ == '__main__':
         else:
             item_reviews_dict[i[1]] = [str_review]
             item_uid_dict[i[1]] = [i[0]]
-
+    print(len(user_reviews_dict))
+    print(len(item_reviews_dict))
     vocab, user_review2doc, item_review2doc, user_reviews_dict, item_reviews_dict = build_doc(user_reviews_dict, item_reviews_dict)
     word_index = {}
     word_index['<unk>'] = 0
@@ -333,7 +334,6 @@ if __name__ == '__main__':
     print(f"The vocab size: {len(word_index)}")
     print(f"Average user document length: {sum([len(i) for i in user_review2doc])/len(user_review2doc)}")
     print(f"Average item document length: {sum([len(i) for i in item_review2doc])/len(item_review2doc)}")
-
     print(now())
     u_minNum, u_maxNum, u_averageNum, u_maxSent, u_minSent, u_pReviewLen, u_pSentLen = countNum(user_reviews_dict)
     print("用户最少有{}个评论,最多有{}个评论，平均有{}个评论, " \
@@ -413,7 +413,6 @@ if __name__ == '__main__':
     # userReview2Index = []
     userDoc2Index, userDocLen = padding_doc(userDoc2Index)
     print(f"user document length: {userDocLen}")
-
     itemReview2Index = []
     itemDoc2Index = []
     item_uid_list = []
@@ -485,3 +484,4 @@ if __name__ == '__main__':
     np.save(f"{save_folder}/train/w2v.npy", w2v)
     end_time = time.time()
     print(f"{now()} all steps finised, cost time: {end_time-start_time:.4f}s")
+    exit()
