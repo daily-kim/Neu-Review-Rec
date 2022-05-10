@@ -214,11 +214,10 @@ if __name__ == '__main__':
         items_id = full_input['item_id'].tolist()
         ratings = full_input['ratings'].tolist()
         reviews = full_input['reviews'].tolist()
-        index = full_input['index'].tolist()
     data_frame = {'user_id': pd.Series(users_id), 'item_id': pd.Series(items_id),
-                  'ratings': pd.Series(ratings), 'reviews': pd.Series(reviews),'index': pd.Series(index)}
-    data = pd.DataFrame(data_frame)     # [['user_id', 'item_id', 'ratings', 'reviews','index']]
-    del users_id, items_id, ratings, reviews,index
+                  'ratings': pd.Series(ratings), 'reviews': pd.Series(reviews)}
+    data = pd.DataFrame(data_frame)     # [['user_id', 'item_id', 'ratings', 'reviews']]
+    del users_id, items_id, ratings, reviews,
 
     uidList, iidList = get_count(data, 'user_id'), get_count(data, 'item_id')
     userNum_all = len(uidList)
@@ -230,12 +229,17 @@ if __name__ == '__main__':
     print(f"data densiy: {data.shape[0]/float(userNum_all * itemNum_all):.4f}")
     print("===============End: rawData size========================")
 
+    user2id = dict((uid, i) for(i, uid) in enumerate(uidList))
+    item2id = dict((iid, i) for(i, iid) in enumerate(iidList))
+    data = numerize(data)
+
+
     print(f"-"*60)
     print(f"{now()} Step2: split datsets into train/val/test, save into npy data")
 
-    data_train = train_input[['user_id','item_id','ratings','reviews','index']]
-    data_valid = valid_input[['user_id','item_id','ratings','reviews','index']]
-    data_test = test_input[['user_id','item_id','ratings','reviews','index']]
+    data_train = train_input[['user_id','item_id','ratings','reviews']]
+    data_valid = valid_input[['user_id','item_id','ratings','reviews']]
+    data_test = test_input[['user_id','item_id','ratings','reviews']]
 
     data_valid_plus_test = pd.concat([data_valid,data_test]) 
     uids_train, iids_train = get_count(data_train, 'user_id'), get_count(data_train, 'item_id')
@@ -271,8 +275,8 @@ if __name__ == '__main__':
     all_index = list(set().union(uid_index, iid_index))
     # data_test = data_test.drop(all_index)
 
-    data_test = test_input[['user_id','item_id','ratings','reviews','index']]
-    data_val = valid_input[['user_id','item_id','ratings','reviews','index']]
+    data_test = test_input[['user_id','item_id','ratings','reviews']]
+    data_val = valid_input[['user_id','item_id','ratings','reviews']]
     uidList_train, iidList_train = get_count(data_train, 'user_id'), get_count(data_train, 'item_id')
     userNum = len(uidList_train)
     itemNum = len(iidList_train)
