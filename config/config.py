@@ -5,8 +5,8 @@ import numpy as np
 
 class DefaultConfig:
 
-    model = 'DeepCoNN'
-    dataset = 'Digital_Music_data'
+    model = 'NARRE'
+    dataset = 'music'
 
     # -------------base config-----------------------#
     use_gpu = True
@@ -34,7 +34,7 @@ class DefaultConfig:
     filters_num = 100
     kernel_size = 3
 
-    num_fea = 1  # id feature, review feature, doc feature
+    num_fea = 2  # id feature, review feature, doc feature
     use_review = True
     use_doc = True
     self_att = False
@@ -91,25 +91,71 @@ class DefaultConfig:
         print('*************************************************')
 
 
-class Digital_Music_data_Config(DefaultConfig):
+# class Digital_Music_data_Config(DefaultConfig):
+
+#     def __init__(self):
+#         self.set_path('Digital_Music_data')
+
+#     vocab_size = 50002
+#     word_dim = 300
+
+#     r_max_len = 202
+
+#     u_max_r = 13
+#     i_max_r = 24
+
+#     train_data_size = 51764
+#     test_data_size = 6471
+#     val_data_size = 6471
+
+#     user_num = 5541 + 2
+#     item_num = 3568 + 2
+
+#     batch_size = 16
+#     print_step = 100
+
+class music_Config(DefaultConfig):
 
     def __init__(self):
-        self.set_path('Digital_Music_data')
+        self.set_path('music_data')
+
+    vocab_size = 46547
+    word_dim = 300
+
+    r_max_len = 23
+
+    u_max_r = 11
+    i_max_r = 11
+
+    train_data_size = 147190
+    test_data_size = 25091
+    val_data_size = 25091
+
+    user_num = 19498 + 2
+    item_num = 21155 + 2
+
+    batch_size = 128
+    print_step = 100
+
+class clothing_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('clothing_data')
 
     vocab_size = 50002
     word_dim = 300
 
-    r_max_len = 202
+    r_max_len = 58
 
-    u_max_r = 13
-    i_max_r = 24
+    u_max_r = 9
+    i_max_r = 17
 
-    train_data_size = 51764
-    test_data_size = 6471
-    val_data_size = 6471
+    train_data_size = 262061
+    test_data_size = 55736
+    val_data_size = 55736
 
-    user_num = 5541 + 2
-    item_num = 3568 + 2
+    user_num = 39387 + 2
+    item_num = 23033 + 2
 
-    batch_size = 16
+    batch_size = 128
     print_step = 100

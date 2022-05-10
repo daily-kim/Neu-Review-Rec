@@ -26,7 +26,7 @@ def collate_fn(batch):
 
 
 def train(**kwargs):
-
+    print('dataset')
     if 'dataset' not in kwargs:
         opt = getattr(config, 'Digital_Music_data_Config')()
     else:

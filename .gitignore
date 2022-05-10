@@ -9,4 +9,5 @@ models/__pycache__
 pro_data/*json
 *pyc
 *npy
+*csv
 lightning_logs/
