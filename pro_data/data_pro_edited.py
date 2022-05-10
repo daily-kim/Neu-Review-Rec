@@ -356,11 +356,11 @@ if __name__ == '__main__':
     u_minNum, u_maxNum, u_averageNum, u_maxSent, u_minSent, u_pReviewLen, u_pSentLen = countNum(user_reviews_dict)
     print("用户最少有{}个评论,最多有{}个评论，平均有{}个评论, " \
          "句子最大长度{},句子的最短长度{}，" \
-         "set u_max_r{}： 设定句子最大长度为{}".format(u_minNum, u_maxNum, u_averageNum, u_maxSent, u_minSent, u_pReviewLen, u_pSentLen))
+         "set u_max_r to {}： 设定句子最大长度为{}".format(u_minNum, u_maxNum, u_averageNum, u_maxSent, u_minSent, u_pReviewLen, u_pSentLen))
     i_minNum, i_maxNum, i_averageNum, i_maxSent, i_minSent, i_pReviewLen, i_pSentLen = countNum(item_reviews_dict)
     print("商品最少有{}个评论,最多有{}个评论，平均有{}个评论," \
          "句子最大长度{},句子的最短长度{}," \
-         ",set i_max_r{}, 设定句子最大长度为{}".format(i_minNum, i_maxNum, i_averageNum, u_maxSent, i_minSent, i_pReviewLen, i_pSentLen))
+         ",set i_max_r to {}, 设定句子最大长度为{}".format(i_minNum, i_maxNum, i_averageNum, u_maxSent, i_minSent, i_pReviewLen, i_pSentLen))
     print("Set r_max_len：{}".format(max(u_pSentLen, i_pSentLen)))
 
     maxSentLen = max(u_pSentLen, i_pSentLen)
